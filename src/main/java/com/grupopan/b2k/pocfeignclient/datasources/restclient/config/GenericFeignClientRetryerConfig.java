@@ -4,26 +4,16 @@ import feign.RetryableException;
 import feign.Retryer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
-public class CustomFeignClientRetryerConfig implements Retryer {
+public class GenericFeignClientRetryerConfig implements Retryer {
 
-  Logger log = LoggerFactory.getLogger(CustomFeignClientRetryerConfig.class);
+  Logger log = LoggerFactory.getLogger(GenericFeignClientRetryerConfig.class);
 
-  @Value("${feign.client.retry.max.attempt}")
-  private int retryMaxAttempt;
-
-  @Value("${feign.client.retry.interval}")
-  private long retryInterval;
-
+  protected int retryMaxAttempt;
+  protected long retryInterval;
   private int attempt = 1;
 
-  public CustomFeignClientRetryerConfig() {
-  }
-
-  public CustomFeignClientRetryerConfig(int retryMaxAttempt, Long retryInterval) {
+  public GenericFeignClientRetryerConfig(int retryMaxAttempt, long retryInterval) {
     this.retryMaxAttempt = retryMaxAttempt;
     this.retryInterval = retryInterval;
   }
@@ -44,6 +34,6 @@ public class CustomFeignClientRetryerConfig implements Retryer {
 
   @Override
   public Retryer clone() {
-    return new CustomFeignClientRetryerConfig(retryMaxAttempt, retryInterval);
+    return new GenericFeignClientRetryerConfig(retryMaxAttempt, retryInterval);
   }
 }

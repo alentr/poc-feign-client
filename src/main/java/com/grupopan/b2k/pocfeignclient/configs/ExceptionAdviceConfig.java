@@ -13,12 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class ExceptionAdviceConfig {
 
-  //FEIGN CLIENTE
-  @Value("${feign.client.retry.max.attempt}")
-  private int retryMaxAttempt;
-  @Value("${feign.client.retry.interval}")
-  private long retryInterval;
-
   @ResponseBody
   @ExceptionHandler(FeignException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -36,7 +30,7 @@ public class ExceptionAdviceConfig {
   public GeneralError RetryableExceptionHandler(RetryableException e) {
     GeneralError generalError = new GeneralError();
     generalError.setCode(500);
-    generalError.setMessage(String.format("Erro de conexão do Feign Client. Foi tentado reconectar %d vezes com um intervalo de %d milisegundos. Mensagem de erro: %s", retryMaxAttempt, retryInterval, e.getMessage()));
+    generalError.setMessage(e.getMessage());
 
     return generalError;
   }
