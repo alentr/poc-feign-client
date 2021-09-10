@@ -1,5 +1,6 @@
-package com.grupopan.b2k.pocfeignclient.datasources.restclient.config;
+package com.grupopan.b2k.pocfeignclient.datasources.restclient.config.poc;
 
+import com.grupopan.b2k.pocfeignclient.datasources.restclient.config.GenericFeignClientRetryerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

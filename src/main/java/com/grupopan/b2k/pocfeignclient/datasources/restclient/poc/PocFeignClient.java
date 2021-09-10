@@ -1,6 +1,6 @@
 package com.grupopan.b2k.pocfeignclient.datasources.restclient.poc;
 
-import com.grupopan.b2k.pocfeignclient.datasources.restclient.config.PocFeignClientRetryerConfig;
+import com.grupopan.b2k.pocfeignclient.datasources.restclient.config.poc.PocFeignClientRetryerConfig;
 import com.grupopan.b2k.pocfeignclient.entities.poc.PocTeste;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
