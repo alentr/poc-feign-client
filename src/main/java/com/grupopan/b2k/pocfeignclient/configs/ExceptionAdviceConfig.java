@@ -37,7 +37,7 @@ public class ExceptionAdviceConfig {
   }
 }
 
-//TODO: essa classe é da lib do PAN
+//TODO: essa classe é da lib do PAN, precisa remover quando for utilizar as libs
 class GeneralError {
 
   @JsonProperty("code")
