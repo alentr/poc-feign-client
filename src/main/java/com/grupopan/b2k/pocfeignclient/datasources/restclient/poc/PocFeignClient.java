@@ -21,7 +21,7 @@ public interface PocFeignClient {
   @PostMapping("/post")
   ResponseEntity<PocTeste> post(
       @RequestHeader Map<String, String> headers,
-      @RequestParam(name = "sortField") String sortField,
+      @RequestParam(name = "sortField", required = false) String sortField,
       @RequestBody PocTeste body);
 
 }

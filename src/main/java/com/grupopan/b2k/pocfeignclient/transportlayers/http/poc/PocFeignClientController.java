@@ -31,7 +31,7 @@ public class PocFeignClientController {
   @PostMapping("/post")
   public ResponseEntity<PocTeste> post(
       @RequestHeader Map<String, String> headers,
-      @RequestParam(name = "sortField") String sortField,
+      @RequestParam(name = "sortField", required = false) String sortField,
       @RequestBody PocTeste body) {
 
     PocTeste pocTeste = pocFeignClientUseCase.post(headers, sortField, body);
