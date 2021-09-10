@@ -1,9 +1,8 @@
 package com.grupopan.b2k.pocfeignclient.configs;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.grupopan.b2k.pocfeignclient.datasources.restclient.poc.FeignRetryException;
 import com.grupopan.b2k.pocfeignclient.repositories.FeignException;
-import feign.RetryableException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,12 +24,14 @@ public class ExceptionAdviceConfig {
   }
 
   @ResponseBody
-  @ExceptionHandler(RetryableException.class)
+  @ExceptionHandler(FeignRetryException.class)
   @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-  public GeneralError RetryableExceptionHandler(RetryableException e) {
+  public GeneralError FeignRetryExceptionHandler(FeignRetryException e) {
     GeneralError generalError = new GeneralError();
     generalError.setCode(500);
-    generalError.setMessage(e.getMessage());
+    generalError.setMessage(String.format(
+        "Erro de conexão no Feign. Foi tentado reconectar %d vezes com um intervalalo de %d milisegundos. Mensagem de erro: %s",
+        e.getRetryMaxAttempt(), e.getRetryInterval(), e.getMessage()));
 
     return generalError;
   }
@@ -38,6 +39,7 @@ public class ExceptionAdviceConfig {
 
 //TODO: essa classe é da lib do PAN
 class GeneralError {
+
   @JsonProperty("code")
   private Integer code;
 

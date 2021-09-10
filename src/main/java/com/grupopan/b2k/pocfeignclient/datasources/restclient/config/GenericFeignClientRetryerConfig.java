@@ -1,5 +1,6 @@
 package com.grupopan.b2k.pocfeignclient.datasources.restclient.config;
 
+import com.grupopan.b2k.pocfeignclient.datasources.restclient.poc.FeignRetryException;
 import feign.RetryableException;
 import feign.Retryer;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class GenericFeignClientRetryerConfig implements Retryer {
     log.info("Feign tentando reconectar pela {}° vez, por conta de {} ", attempt, e.getMessage());
 
     if(attempt++ == retryMaxAttempt){
-      throw e;
+      throw new FeignRetryException(this.retryMaxAttempt, this.retryInterval, e.getMessage());
     }
     try {
       Thread.sleep(retryInterval);
