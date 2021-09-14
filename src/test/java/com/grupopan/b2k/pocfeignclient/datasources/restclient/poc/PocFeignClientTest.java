@@ -4,7 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.tomakehurst.wiremock.WireMockServer;
-import com.grupopan.b2k.pocfeignclient.configs.WireMockConfig;
+import com.grupopan.b2k.pocfeignclient.config.WireMockConfig;
 import com.grupopan.b2k.pocfeignclient.entities.poc.PocTeste;
 import java.io.IOException;
 import java.util.Objects;
